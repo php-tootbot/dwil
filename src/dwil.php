@@ -18,7 +18,7 @@ use PHPTootBot\PHPTootBot\Util;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use function array_rand;
-use function is_object;
+use function count;
 use function mb_strlen;
 use function sprintf;
 use function strtotime;
@@ -42,6 +42,8 @@ class dwil extends TootBot{
 		$this->uwuifier = new Uwuify($this->options);
 		$this->tweets   = Util::loadJSON($this->options->dataDir.'/dwil.json', true);
 		$this->posted   = Util::loadJSON($this->options->dataDir.'/posted.json');
+
+		$this->logger->info(sprintf('%d tweets in dataset', count($this->tweets)));
 	}
 
 	/**
@@ -49,15 +51,20 @@ class dwil extends TootBot{
 	 */
 	public function __destruct(){
 		Util::saveJSON($this->options->dataDir.'/posted.json', $this->posted);
+
+		$this->logger->info(sprintf('%d uwuified tweets already posted', count($this->posted)));
 	}
 
 	/**
 	 * remove used lines from the data pool
 	 */
 	protected function updatePool():void{
+
 		foreach($this->posted as $toot){
 			unset($this->tweets[$toot->tweetID]);
 		}
+
+		$this->logger->info(sprintf('dataset updated: %d tweets remain', count($this->tweets)));
 	}
 
 	/**
@@ -154,7 +161,7 @@ class dwil extends TootBot{
 	protected function submitTootFailure(ResponseInterface $response):void{
 		$json = MessageUtil::decodeJSON($response);
 
-		if(is_object($json) && isset($json->error)){
+		if(isset($json->error)){
 			$this->logger->error($json->error);
 		}
 
