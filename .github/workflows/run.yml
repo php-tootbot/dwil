@@ -1,9 +1,6 @@
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # run the script every 3 hours
     - cron: "0 3,9,15,21 * * *"
@@ -34,9 +31,6 @@ jobs:
 
       - name: "Install dependencies with composer"
         uses: ramsey/composer-install@v2
-
-#      - name: "Fetch cacert.pem from curl.haxx.se"
-#        run: wget -O config/cacert.pem https://curl.se/ca/cacert.pem
 
       - name: "Run bot"
         run: php ./cli/run.php
