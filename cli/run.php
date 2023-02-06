@@ -9,8 +9,8 @@
  */
 
 use chillerlan\DotEnv\DotEnv;
-use PHPTootBot\MyTootBot\MyTootBot;
-use PHPTootBot\PHPTootBot\TootBotOptions;
+use PHPTootBot\dwil\dwil;
+use PHPTootBot\dwil\dwilOptions;
 use Psr\Log\LogLevel;
 
 ini_set('date.timezone', 'UTC');
@@ -32,29 +32,58 @@ else{
 
 
 // invoke the options instance
-$options = new TootBotOptions;
+// please excuse the IDE yelling: https://youtrack.jetbrains.com/issue/WI-66549
+$options = new dwilOptions;
 
 // HTTPOptions
-$options->ca_info        = realpath(__DIR__.'/../config/cacert.pem'); // https://curl.haxx.se/ca/cacert.pem
-$options->user_agent     = 'phpTootBot/1.0 +https://github.com/php-tootbot/php-tootbot';
-$options->retries        = 3;
+$options->ca_info                  = realpath(__DIR__.'/../config/cacert.pem'); // https://curl.haxx.se/ca/cacert.pem
+$options->user_agent               = 'phpTootBot/1.0 +https://github.com/php-tootbot/php-tootbot';
+$options->retries                  = 1;
 
 // OAuthOptionsTrait
 // these settings are only required for authentication/remote token acquisition
-#$options->key            = $env->get('MASTODON_KEY') ?? '';
-#$options->secret         = $env->get('MASTODON_SECRET') ?? '';
-#$options->callbackURL    = $env->get('MASTODON_CALLBACK_URL') ?? '';
-#$options->sessionStart   = true;
+#$options->key                      = $env->get('MASTODON_KEY') ?? '';
+#$options->secret                   = $env->get('MASTODON_SECRET') ?? '';
+#$options->callbackURL              = $env->get('MASTODON_CALLBACK_URL') ?? '';
+#$options->sessionStart             = true;
 
 // TootBotOptions
-$options->instance       = $instance;
-$options->apiToken       = $apiToken;
-$options->loglevel       = LogLevel::INFO;
-#$options->buildDir       = __DIR__.'/../.build';
-$options->dataDir        = __DIR__.'/../data';
-$options->tootVisibility = 'public';
+$options->instance                 = $instance;
+$options->apiToken                 = $apiToken;
+$options->loglevel                 = LogLevel::INFO;
+#$options->buildDir                 = __DIR__.'/../.build';
+$options->dataDir                  = __DIR__.'/../data';
+$options->tootVisibility           = 'private';
+
+// UwuifyOptionsTrait
+// all threshold values range [0-100], -1 to disable
+
+// controls how much the text will be uwufied
+$options->uwuModifier              = 80;
+
+// these 6 options control the appearance of the several additional elements in spaces between words
+// if the combined total value exceeds 100, each value will be adjusted to percentages ($val / $sum * 100)
+$options->spaceModifierPunctuation = 5;
+$options->spaceModifierEmoticon    = 5;
+$options->spaceModifierEmoji       = 15;
+$options->spaceModifierKaomoji     = -1;
+$options->spaceModifierActions     = -1;
+$options->spaceModifierStutter     = 15;
+
+// these 3 options control text upper/lowercasing (same adjustment as above)
+$options->lowercaseModifier        = -1;
+$options->uppercaseModifier        = 15;
+$options->mockingcaseModifier      = 10;
+
+$options->mockingModifier          = 60;
+$options->exclamationModifier      = 10;
+$options->stutterEllipseModifier   = -1;
+
+$options->exclamationMinLength     = 2;
+$options->exclamationMaxLength     = 5;
+
 
 // invoke the bot instance and post
-(new MyTootBot($options))->post();
+(new dwil($options))->post();
 
-exit;
+exit(0);

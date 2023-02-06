@@ -1,12 +1,17 @@
 {
-	"description": "A template library for Mastodon bots.",
-	"homepage": "https://github.com/php-tootbot/php-tootbot",
+	"description": "dwil - dril, but UwU.",
+	"homepage": "https://github.com/php-tootbot/dwil",
 	"license": "MIT",
 	"type": "project",
 	"authors": [
 		{
+			"name": "smiley",
+			"email": "smiley@chillerlan.net",
+			"homepage": "https://github.com/codemasher"
+		},
+		{
 			"name": "Contributors",
-			"homepage":"https://github.com/php-tootbot/php-tootbot/graphs/contributors"
+			"homepage":"https://github.com/php-tootbot/dwil/graphs/contributors"
 		}
 	],
 	"minimum-stability": "dev",
@@ -17,6 +22,7 @@
 		"ext-json": "*",
 		"ext-mbstring": "*",
 		"ext-openssl": "*",
+		"codemasher/uwuify": "dev-main#c843662c55cab714815776976c6b3d126b9fb330",
 		"php-tootbot/php-tootbot": "dev-main#cf87184a13e045948d609584e530d32e3a2f9a25"
 	},
 	"require-dev": {
@@ -25,12 +31,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"PHPTootBot\\MyTootBot\\": "src/"
+			"PHPTootBot\\dwil\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"PHPTootBot\\MyTootBotTest\\": "tests/"
+			"PHPTootBot\\dwilTest\\": "tests/"
 		}
 	},
 	"scripts": {
