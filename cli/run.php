@@ -38,7 +38,7 @@ $options = new dwilOptions;
 // HTTPOptions
 $options->ca_info                  = realpath(__DIR__.'/../config/cacert.pem'); // https://curl.haxx.se/ca/cacert.pem
 $options->user_agent               = 'phpTootBot/1.0 +https://github.com/php-tootbot/php-tootbot';
-$options->retries                  = 1;
+$options->retries                  = 3;
 
 // OAuthOptionsTrait
 // these settings are only required for authentication/remote token acquisition
