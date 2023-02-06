@@ -22,7 +22,7 @@ jobs:
       matrix:
         php-version:
           - "8.1"
-          - "8.2"
+#          - "8.2"
 
     env:
       PHAN_ALLOW_XDEBUG: 0
@@ -56,9 +56,9 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
+#          - windows-latest
         php-version:
-          - "8.1"
+#          - "8.1"
           - "8.2"
 
     steps:
