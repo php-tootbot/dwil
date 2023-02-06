@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./data
-          key: ${{ hashFiles('./data/**') }}
+          key: ${{ hashFiles('**/data/*.json') }}
 
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
