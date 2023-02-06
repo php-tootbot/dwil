@@ -53,7 +53,7 @@ $options->apiToken                 = $apiToken;
 $options->loglevel                 = LogLevel::INFO;
 #$options->buildDir                 = __DIR__.'/../.build';
 $options->dataDir                  = __DIR__.'/../data';
-$options->tootVisibility           = 'private';
+$options->tootVisibility           = 'public';
 
 // UwuifyOptionsTrait
 // all threshold values range [0-100], -1 to disable
