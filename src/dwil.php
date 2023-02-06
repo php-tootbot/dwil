@@ -18,8 +18,11 @@ use PHPTootBot\PHPTootBot\Util;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use function array_rand;
+use function array_slice;
 use function count;
 use function mb_strlen;
+use function mt_rand;
+use function rtrim;
 use function sprintf;
 use function strtotime;
 
@@ -80,6 +83,13 @@ class dwil extends TootBot{
 		}
 
 		$this->currentTweetID = (int)array_rand($this->tweets);
+
+		// post one of the top tweets on a probability
+		if(mt_rand(0, 100) < $this->options->topTweetProbability){
+			$tweets = array_slice($this->tweets, 0, $this->options->topTweetLimit, true);
+
+			$this->currentTweetID = (int)array_rand($tweets);
+		}
 
 		return $this->tweets[$this->currentTweetID];
 	}

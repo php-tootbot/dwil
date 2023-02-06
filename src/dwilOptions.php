@@ -18,4 +18,7 @@ use PHPTootBot\PHPTootBot\TootBotOptions;
  */
 class dwilOptions extends TootBotOptions{
 	use UwuifyOptionsTrait;
+
+	protected int $topTweetProbability = 10;
+	protected int $topTweetLimit       = 100;
 }

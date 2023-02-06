@@ -35,7 +35,7 @@ else{
 // please excuse the IDE yelling: https://youtrack.jetbrains.com/issue/WI-66549
 $options = new dwilOptions;
 
-// HTTPOptions
+// HTTPOptionsTrait
 $options->ca_info                  = realpath(__DIR__.'/../config/cacert.pem'); // https://curl.haxx.se/ca/cacert.pem
 $options->user_agent               = 'phpTootBot/1.0 +https://github.com/php-tootbot/php-tootbot';
 $options->retries                  = 3;
@@ -54,6 +54,10 @@ $options->loglevel                 = LogLevel::INFO;
 #$options->buildDir                 = __DIR__.'/../.build';
 $options->dataDir                  = __DIR__.'/../data';
 $options->tootVisibility           = 'public';
+
+// dwilOptions
+$options->topTweetProbability      = 15;
+$options->topTweetLimit            = 100;
 
 // UwuifyOptionsTrait
 // all threshold values range [0-100], -1 to disable
