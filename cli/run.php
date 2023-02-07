@@ -63,7 +63,7 @@ $options->topTweetLimit            = 100;
 // all threshold values range [0-100], -1 to disable
 
 // controls how much the text will be uwufied
-$options->uwuModifier              = 80;
+$options->uwuModifier              = 70;
 
 // these 6 options control the appearance of the several additional elements in spaces between words
 // if the combined total value exceeds 100, each value will be adjusted to percentages ($val / $sum * 100)
@@ -72,12 +72,12 @@ $options->spaceModifierEmoticon    = 5;
 $options->spaceModifierEmoji       = 15;
 $options->spaceModifierKaomoji     = -1;
 $options->spaceModifierActions     = -1;
-$options->spaceModifierStutter     = 15;
+$options->spaceModifierStutter     = 5;
 
 // these 3 options control text upper/lowercasing (same adjustment as above)
-$options->lowercaseModifier        = -1;
-$options->uppercaseModifier        = 15;
-$options->mockingcaseModifier      = 10;
+$options->lowercaseModifier        = 5;
+$options->uppercaseModifier        = 5;
+$options->mockingcaseModifier      = 5;
 
 $options->mockingModifier          = 60;
 $options->exclamationModifier      = 10;
