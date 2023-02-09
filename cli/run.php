@@ -87,23 +87,23 @@ $options->exclamationMinLength     = 2;
 $options->exclamationMaxLength     = 5;
 
 $options->uwuMap = [
-	'/(?:r|l)/'       => 'w',
-	'/(?:R|L)/'       => 'W',
-	'/you\'?(r|w)e/i' => 'ur', // before/after modification
-	'/you/i'          => 'u',
-	'/a(r|w)e/i'      => 'r',
-	'/n([aeiou])/'    => 'ny$1',
-	'/N([aeiou])/'    => 'Ny$1',
-	'/N([AEIOU])/'    => 'NY$1',
-	'/ove/i'          => 'uv',
-#	'/their/i'        => 'deyw', // @todo
-	'/they/i'         => 'dey',
-	'/the/i'          => 'da',
-	'/this/i'         => 'dis',
-#	'/th/i'           => 'd',
-	'/ou/'            => 'ow',
-	'/Ou/'            => 'Ow',
-	'/OU/'            => 'OW',
+	'/(?:r|l)/'         => 'w',
+	'/(?:R|L)/'         => 'W',
+	'/^you\'?(r|w)e$/i' => 'ur', // before/after modification
+	'/^you$/i'          => 'u',
+	'/^a(r|w)e$/i'      => 'r',
+	'/n([aeiou])/'      => 'ny$1',
+	'/N([aeiou])/'      => 'Ny$1',
+	'/N([AEIOU])/'      => 'NY$1',
+	'/ove/i'            => 'uv',
+#	'/their/i'          => 'deyw', // @todo
+	'/^they$/i'         => 'dey',
+	'/^the$/i'          => 'da',
+	'/^this$/i'         => 'dis',
+#	'/th/i'             => 'd',
+	'/ou/'              => 'ow',
+	'/Ou/'              => 'Ow',
+	'/OU/'              => 'OW',
 ];
 
 // invoke the bot instance and post
