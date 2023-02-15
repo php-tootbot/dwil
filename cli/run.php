@@ -69,7 +69,7 @@ $options->uwuModifier              = 70;
 // if the combined total value exceeds 100, each value will be adjusted to percentages ($val / $sum * 100)
 $options->spaceModifierPunctuation = 5;
 $options->spaceModifierEmoticon    = 5;
-$options->spaceModifierEmoji       = 15;
+$options->spaceModifierEmoji       = 20;
 $options->spaceModifierKaomoji     = -1;
 $options->spaceModifierActions     = -1;
 $options->spaceModifierStutter     = 5;
