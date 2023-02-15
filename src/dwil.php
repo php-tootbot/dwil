@@ -67,6 +67,10 @@ class dwil extends TootBot{
 			unset($this->tweets[$toot->tweetID]);
 		}
 
+		if(empty($this->tweets)){
+			throw new RuntimeException('data pool is empty');
+		}
+
 		$this->logger->info(sprintf('dataset updated: %d tweets remain', count($this->tweets)));
 	}
 
@@ -76,19 +80,17 @@ class dwil extends TootBot{
 	 * @throws \RuntimeException
 	 */
 	protected function getPoolItem():string{
-		$this->updatePool();
-
-		if(empty($this->tweets)){
-			throw new RuntimeException('data pool is empty');
-		}
-
-		$this->currentTweetID = (int)array_rand($this->tweets);
 
 		// post one of the top tweets on a probability
 		if(mt_rand(0, 100) < $this->options->topTweetProbability){
 			$tweets = array_slice($this->tweets, 0, $this->options->topTweetLimit, true);
 
 			$this->currentTweetID = (int)array_rand($tweets);
+		}
+		else{
+			$this->updatePool();
+
+			$this->currentTweetID = (int)array_rand($this->tweets);
 		}
 
 		return $this->tweets[$this->currentTweetID];
