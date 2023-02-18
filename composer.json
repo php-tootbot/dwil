@@ -23,7 +23,7 @@
 		"ext-mbstring": "*",
 		"ext-openssl": "*",
 		"codemasher/uwuify": "dev-main#c843662c55cab714815776976c6b3d126b9fb330",
-		"php-tootbot/php-tootbot": "dev-main#cf87184a13e045948d609584e530d32e3a2f9a25"
+		"php-tootbot/php-tootbot": "dev-main#b77edf504e2ed6a8f127a34df1cc19b13d498051"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^10.0",
