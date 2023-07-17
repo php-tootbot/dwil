@@ -13,7 +13,6 @@ namespace PHPTootBot\dwil;
 use chillerlan\HTTP\Utils\MessageUtil;
 use codemasher\Uwuify\Uwuify;
 use PHPTootBot\PHPTootBot\TootBot;
-use PHPTootBot\PHPTootBot\TootBotInterface;
 use PHPTootBot\PHPTootBot\Util;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -137,15 +136,15 @@ class dwil extends TootBot{
 	/**
 	 * @inheritDoc
 	 */
-	public function post():TootBotInterface{
+	public function post():static{
 
-		$params = [
+		$body = [
 			'status'     => $this->getUwuifiedLine(),
 			'visibility' => $this->options->tootVisibility,
 			'language'   => 'en',
 		];
 
-		$this->submitToot($params);
+		$this->submitToot($body);
 
 		return $this;
 	}
