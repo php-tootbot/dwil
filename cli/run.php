@@ -14,22 +14,15 @@ use PHPTootBot\dwil\dwilOptions;
 use Psr\Log\LogLevel;
 
 ini_set('date.timezone', 'UTC');
+mb_internal_encoding('UTF-8');
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 // if we're running on gh-actions, we're going to fetch the variables from gh.secrets,
-if(isset($_SERVER['GITHUB_ACTIONS'])){
-	$instance = getenv('MASTODON_INSTANCE');
-	$apiToken = getenv('MASTODON_TOKEN');
+// otherwise we'll load them from the local .env file
+if(!isset($_SERVER['GITHUB_ACTIONS'])){
+	(new DotEnv(__DIR__.'/../config', '.env', true))->load();
 }
-// otherwise we're loading them from the local .env file
-else{
-	$env = (new DotEnv(__DIR__.'/../config', '.env', false))->load();
-
-	$instance = $env->get('MASTODON_INSTANCE');
-	$apiToken = $env->get('MASTODON_TOKEN');
-}
-
 
 // invoke the options instance
 // please excuse the IDE yelling: https://youtrack.jetbrains.com/issue/WI-66549
@@ -42,14 +35,14 @@ $options->retries                  = 3;
 
 // OAuthOptionsTrait
 // these settings are only required for authentication/remote token acquisition
-#$options->key                      = $env->get('MASTODON_KEY') ?? '';
-#$options->secret                   = $env->get('MASTODON_SECRET') ?? '';
-#$options->callbackURL              = $env->get('MASTODON_CALLBACK_URL') ?? '';
+#$options->key                      = getenv('MASTODON_KEY');
+#$options->secret                   = getenv('MASTODON_SECRET');
+#$options->callbackURL              = getenv('MASTODON_CALLBACK_URL');
 #$options->sessionStart             = true;
 
 // TootBotOptions
-$options->instance                 = $instance;
-$options->apiToken                 = $apiToken;
+$options->instance                 = getenv('MASTODON_INSTANCE');
+$options->apiToken                 = getenv('MASTODON_TOKEN');
 $options->loglevel                 = LogLevel::INFO;
 #$options->buildDir                 = __DIR__.'/../.build';
 $options->dataDir                  = __DIR__.'/../data';
