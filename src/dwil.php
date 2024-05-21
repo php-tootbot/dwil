@@ -169,11 +169,14 @@ class dwil extends TootBot{
 	/**
 	 * @inheritDoc
 	 */
-	protected function submitTootFailure(ResponseInterface $response):void{
-		$json = MessageUtil::decodeJSON($response);
+	protected function submitTootFailure(ResponseInterface|null $response):void{
 
-		if(isset($json->error)){
-			$this->logger->error($json->error);
+		if($response instanceof ResponseInterface){
+			$json = MessageUtil::decodeJSON($response);
+
+			if(isset($json->error)){
+				$this->logger->error($json->error);
+			}
 		}
 
 		exit(255);

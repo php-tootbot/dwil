@@ -2,8 +2,8 @@
 
 on:
   schedule:
-    # POSIX cron syntax (every 6 hours), https://crontab.guru/#0_3,9,15,21_*_*_*
-    - cron: "0 3,9,15,21 * * *"
+    # POSIX cron syntax (every 6 hours), https://crontab.guru/#0_*/6_*_*_*
+    - cron: "0 */6 * * *"
 
 name: "Run"
 
@@ -14,29 +14,32 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     env:
       MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
       MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
 
     steps:
       - name: "Checkout sources"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.3"
           coverage: none
-          extensions: curl, json, mbstring, openssl, sodium
+          extensions: curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: "Run bot"
         run: php ./cli/run.php
 
       - name: "Commit log"
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: ":octocat: posted toot"
           file_pattern: "data/posted.json"
